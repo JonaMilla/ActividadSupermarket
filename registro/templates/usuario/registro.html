@@ -1,0 +1,10 @@
+{% extends "base/index.html" %}
+
+{% block main %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ formulario }}
+        <input type="submit" value="Guardar">
+    </form>
+    
+{% endblock main %}
