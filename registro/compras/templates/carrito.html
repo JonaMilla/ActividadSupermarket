@@ -1,8 +1,35 @@
 {% extends "base.html" %}
+
 {% block title %}Carrito{% endblock title %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
-
+    <div class="mt-3">
+        <div class="row mb-3">
+            <div class="col-3 offset-9">
+                <a href="{% url 'crear_producto' %}" class="btn btn-primary float-right">
+                    Crear nuevo producto
+                </a>
+            </div>
+        </div>
+        {% if listar_productos %}
+            {% for producto in listar_productos %}
+                {% if forloop.first %}<div class="row">{% endif %}
+                <div class="col-3">
+                    <div class="card">
+                        <img class="card-img-top" height="150" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_producto }}" >
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre_producto}} <br> {{ producto.descripcion }} <br> ${{ producto.precio }}</h5>
+                            <hr>
+                            <h6 class="card-subtitle"> Comprador "{{ producto.autor.username }}"</h6>
+                            <div class="card-text">Categoría: {{ producto.categoria.nombre }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}    
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-danger">No hay nada aquí :( </div>
+        {% endif %}
+    </div>
 {% endblock content %}

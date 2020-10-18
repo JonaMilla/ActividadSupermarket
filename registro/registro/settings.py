@@ -130,7 +130,6 @@ STATICFILES_DIRS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # CLASES PARA LOS MENSAJES FLASH DE BOOTSTRAP
-
 MESSAGE_TAGS = {
     message_constants.DEBUG: 'debug',
     message_constants.INFO: 'info',
@@ -138,3 +137,7 @@ MESSAGE_TAGS = {
     message_constants.WARNING: 'warning',
     message_constants.ERROR: 'danger'
 }
+
+#URLS PARA LOS ARCHIVOS DE MEDIA DE LA BASE DE DATOS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

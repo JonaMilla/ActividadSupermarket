@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login as auth_login, logout, authenticate
 
 
 def login(request):
@@ -13,7 +13,7 @@ def login(request):
             password = form.cleaned_data.get("password")
             usuario = authenticate(username=nombre_usuario, password=password)
             if usuario is not None:
-                login(request, usuario)
+                auth_login(request, usuario)
                 messages.success(request, F"Bienvenido(a) nuevamente {nombre_usuario}")
                 return redirect("carrito")
             else:
@@ -43,7 +43,7 @@ class vistaRegistro(View):
             usuario_registrado = form.save()
             nombre_usuario = form.cleaned_data.get("username")
             messages.success(request, F"Bienvenido(a) al Supermercado online 🧀🍋🍊🍬{nombre_usuario}")
-            login(request, usuario_registrado)
+            auth_login(request, usuario_registrado)
             return redirect("carrito")
         else:
             for msg in form.error_messages:
