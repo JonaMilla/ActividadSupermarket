@@ -23,11 +23,21 @@
                             <h6 class="card-subtitle"> Comprador "{{ producto.autor.username }}"</h6>
                             <div class="card-text">Categoría: {{ producto.categoria.nombre }}</div>
                         </div>
+                        <div class="card-footer">
+                            {% if user == producto.autor %}
+                                <a href="{% url 'eliminarProducto' producto.id %}" class="btn btn-danger">
+                                    Eliminar Producto
+                                </a>
+                            {% endif %}
+                        </div>   
                     </div>
                 </div>
                 {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}    
             {% endfor %}
+
+            {% include "paginas.html" %}
+
         {% else %}
             <div class="alert alert-danger">No hay nada aquí :( </div>
         {% endif %}
